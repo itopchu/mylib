@@ -6,7 +6,7 @@
 /*   By: itopchu <itopchu@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/24 21:24:10 by itopchu       #+#    #+#                 */
-/*   Updated: 2023/01/13 11:06:53 by anonymous     ########   odam.nl         */
+/*   Updated: 2023/01/22 17:10:38 by anonymous     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static char	*waste(char **m, size_t line_size)
 	size_t	size_rem;
 	char	*str_rem;
 
-	size_rem = ft_strlen(*m, '\0') - line_size;
+	size_rem = ft_strlen_var(*m, '\0') - line_size;
 	if (size_rem == 0 || !ft_strchr(*m, '\n'))
 		return (free(*m), NULL);
 	str_rem = ft_strdup(*m + line_size);
@@ -51,9 +51,9 @@ static char	*give_line(char **m)
 	int		length;
 
 	if (ft_strchr(*m, '\n'))
-		length = ft_strlen(*m, '\n') + 1;
+		length = ft_strlen_var(*m, '\n') + 1;
 	else
-		length = ft_strlen(*m, '\0');
+		length = ft_strlen_var(*m, '\0');
 	line = malloc((length + 1) * sizeof(char));
 	if (!line)
 		return (free(*m), NULL);

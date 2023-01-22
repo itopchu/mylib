@@ -6,7 +6,7 @@
 /*   By: itopchu <itopchu@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/25 19:24:10 by itopchu       #+#    #+#                 */
-/*   Updated: 2023/01/13 11:06:49 by anonymous     ########   odam.nl         */
+/*   Updated: 2023/01/22 17:10:28 by anonymous     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_strchr(const char *s, int c)
 	return ((char *)s);
 }
 
-size_t	ft_strlen(const char *c, int var)
+size_t	ft_strlen_var(const char *c, int var)
 {
 	size_t	ret;
 
@@ -38,7 +38,7 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t dstsize)
 	size_t	i;
 
 	i = 0;
-	s_len = ft_strlen(src, '\0');
+	s_len = ft_strlen_var(src, '\0');
 	if (dstsize == 0)
 		return (s_len);
 	while (i < dstsize - 1 && src[i] != 0)
@@ -58,8 +58,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	if (s1 == NULL || s2 == NULL)
 		return (NULL);
-	s1_len = ft_strlen((char *)s1, '\0');
-	s2_len = ft_strlen((char *)s2, '\0');
+	s1_len = ft_strlen_var((char *)s1, '\0');
+	s2_len = ft_strlen_var((char *)s2, '\0');
 	rtn = malloc(sizeof(char) * (s1_len + s2_len + 1));
 	if (!rtn)
 		return (free((char *)s1), NULL);
@@ -74,7 +74,7 @@ char	*ft_strdup(char const *s1)
 	char	*rtn;
 	size_t	s1_len;
 
-	s1_len = ft_strlen(s1, '\0');
+	s1_len = ft_strlen_var(s1, '\0');
 	rtn = (char *)malloc(s1_len + 1);
 	if (!rtn)
 		return (NULL);

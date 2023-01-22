@@ -6,7 +6,7 @@
 /*   By: itopchu <itopchu@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/24 21:26:31 by itopchu       #+#    #+#                 */
-/*   Updated: 2022/11/16 15:04:10 by itopchu       ########   odam.nl         */
+/*   Updated: 2023/01/22 17:10:11 by anonymous     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 //get_next_line_utils
 char	*ft_strchr(const char *s, int c);
-size_t	ft_strlen(const char *c, int var);
+size_t	ft_strlen_var(const char *c, int var);
 size_t	ft_strlcpy(char *dest, const char *src, size_t dstsize);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strdup(char const *s1);
