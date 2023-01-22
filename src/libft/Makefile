@@ -10,22 +10,21 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= libft.a
+NAME	= libft
 HEADER	= ../header/
-ARCHIVE_NAME = $(NAME)
-####################################
+ARCHIVE_NAME = $(NAME).a
+# **************************************************************************** #
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror
 COMPILE = $(CC) $(CFLAGS) -I $(HEADER)
 RM		= rm -rf
-####################################
+# **************************************************************************** #
 AR		= ar
 ARFLAGS	= -rcs
 ARCHIVE	= $(AR) $(ARFLAGS)
-####################################
-DIR_OBJ	= ../obj/libft/
-DIR_ARCH= ../archives/
-####################################
+# **************************************************************************** #
+DIR_OBJ	= ../../obj/
+# **************************************************************************** #
 SRC 	=	ft_atoi.c \
 			ft_bzero.c \
 			ft_isalpha.c \
@@ -59,9 +58,8 @@ SRC 	=	ft_atoi.c \
 			ft_putstr_fd.c \
 			ft_putendl_fd.c \
 			ft_putnbr_fd.c \
-			ft_split.c 
-
-SRCB	=	ft_lstnew.c \
+			ft_split.c \
+			ft_lstnew.c \
 			ft_lstadd_front.c \
 			ft_lstsize.c \
 			ft_lstlast.c \
@@ -70,37 +68,22 @@ SRCB	=	ft_lstnew.c \
 			ft_lstclear.c \
 			ft_lstiter.c \
 			ft_lstmap.c
-####################################
+# **************************************************************************** #
 OBJ		= $(SRC:%.c=$(DIR_OBJ)%.o)
-OBJB	= $(SRCB:%.c=$(DIR_OBJ)%.o)
-####################################
-ifdef WITH_BONUS
-SRC += $(SRCB)
-endif
-####################################
+# **************************************************************************** #
 $(DIR_OBJ)%.o: %.c $(HEADER)
-	@mkdir -p $(DIR_OBJ)
 	@$(COMPILE) -o $@ -c $<
-	@echo "Objects created and put in $(DIR_OBJ)."
 
-$(DIR_ARCH)$(ARCHIVE_NAME): $(OBJ)
-	@mkdir -p $(DIR_ARCH)
-	@$(ARCHIVE) $(DIR_ARCH)$(ARCHIVE_NAME) $(OBJ)
-	@echo "Archived and put in $(DIR_ARCH)$(ARCHIVE_NAME)."
-####################################
-all: $(DIR_ARCH)$(ARCHIVE_NAME)
+$(ARCHIVE_NAME): $(OBJ)
+	@$(ARCHIVE) $(ARCHIVE_NAME) $(OBJ)
+	@echo "$(NAME) is compiled."
+# **************************************************************************** #
+all: $(ARCHIVE_NAME)
 
-bonus:
-	@$(MAKE) WITH_BONUS=1
-
-clean:
-	@$(RM) $(DIR_OBJ)
-	@echo "$(DIR_OBJ) is removed with it's components."
-
-fclean: clean
-	@$(RM) $(DIR_ARCH)$(ARCHIVE_NAME)
-	@echo "$(ARCHIVE_NAME) is removed in $(DIR_ARCH)"
+fclean:
+	@$(RM) $(ARCHIVE_NAME)
+	@echo "$(ARCHIVE_NAME) is removed"
 
 re: fclean all
 
-.PHONY: clean all fclean re bonus
+.PHONY: clean all fclean re
