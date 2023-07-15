@@ -49,6 +49,7 @@ OBJ_O	=	base_conv.o \
 			ft_strlcpy.o \
 			ft_strlen.o \
 			ft_strncmp.o \
+			ft_strndup.o \
 			ft_strnstr.o \
 			ft_strrchr.o \
 			ft_tolower.o \
@@ -74,7 +75,8 @@ OBJ_O	=	base_conv.o \
 			ft_lstdelone.o \
 			ft_lstclear.o \
 			ft_lstiter.o \
-			ft_lstmap.o
+			ft_lstmap.o \
+			ft_free2m.o
 # **************************************************************************** #
 OBJ		= $(OBJ_O:%.o=$(DIR_OBJ)%.o)
 # **************************************************************************** #
