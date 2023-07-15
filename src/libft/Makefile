@@ -42,6 +42,7 @@ SRC 	=	ft_atoi.c \
 			ft_strlcpy.c \
 			ft_strlen.c \
 			ft_strncmp.c \
+			ft_strndup.c \
 			ft_strnstr.c \
 			ft_strrchr.c \
 			ft_tolower.c \
@@ -67,7 +68,8 @@ SRC 	=	ft_atoi.c \
 			ft_lstdelone.c \
 			ft_lstclear.c \
 			ft_lstiter.c \
-			ft_lstmap.c
+			ft_lstmap.c \
+			ft_free2m.c
 # **************************************************************************** #
 OBJ		= $(SRC:%.c=$(DIR_OBJ)%.o)
 # **************************************************************************** #

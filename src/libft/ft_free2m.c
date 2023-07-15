@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_strrchr.c                                       :+:    :+:            */
+/*   ft_free2m.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: itopchu <itopchu@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/10/08 17:07:15 by itopchu       #+#    #+#                 */
-/*   Updated: 2022/10/08 17:07:15 by itopchu       ########   odam.nl         */
+/*   Created: 2023/07/16 00:50:59 by itopchu       #+#    #+#                 */
+/*   Updated: 2023/07/16 00:50:59 by itopchu       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/libft.h"
-
-char	*ft_strrchr(const char *s, int c)
+void	ft_free2m(char **s)
 {
-	char	*last;
+	int	i;
 
-	last = NULL;
-	while (*s)
-	{
-		if (*s == (char)c)
-			last = (char *)s;
-		s++;
-	}
-	if (*s == (char)c)
-		return ((char *)s);
-	return (last);
+	if (!s || *s)
+		return ;
+	i = -1;
+	while (s[++i])
+		free(s[i]);
+	free(s);
 }

@@ -12,27 +12,30 @@
 
 #include "../header/libft.h"
 
+static int	len_in(int n)
+{
+	int	ret;
+
+	if (!n)
+		return (1);
+	ret = 1;
+	while (n != 0)
+	{
+		n /= 10;
+		ret++;
+	}
+	return (ret);
+}
+
 void	ft_putnbr_fd(int n, int fd)
 {
+	char	*str;
+
 	if (fd < 0)
 		return ;
-	if (n == -2147483648)
-	{
-		ft_putstr_fd("-2147483648", fd);
+	str = ft_itoa(n);
+	if (!str)
 		return ;
-	}
-	if (n < 0)
-	{
-		n *= -1;
-		ft_putchar_fd('-', fd);
-	}
-	if (n >= 10)
-	{
-		ft_putnbr_fd(n / 10, fd);
-		ft_putchar_fd(n % 10 + '0', fd);
-	}
-	if (n < 10)
-	{
-		ft_putchar_fd(n + '0', fd);
-	}
+	write(fd, str, ft_strlen(str));
+	free(str);
 }

@@ -12,90 +12,56 @@
 
 #include "../header/libft.h"
 
-static void	ft_free2m(char	**data, size_t word)
+static void	ft_free_local_2m(char	**data, int word)
 {
-	size_t	i;
+	int	i;
 
-	i = 0;
-	while (i <= word)
-	{
-		if (data[i])
-			free(data[i]);
-		i++;
-	}
+	if (!data)
+		return ;
+	i = -1;
+	while (data[++i])
+		free(data[i]);
 	free(data);
 }
 
 static int	word_count(char const *s, char c)
 {
-	int	rtn;
-
-	rtn = 0;
-	while (*s)
-	{
-		if (*s != c && (*(s + 1) == c || !*(s + 1)))
-			rtn++;
-		s++;
-	}
-	return (rtn);
-}
-
-static int	word_len(char const *s, char c)
-{
 	int	i;
+	int	ret;
 
-	if (!s)
-		return (0);
-	i = 0;
-	while (*s == c)
-		s++;
-	while (*s != c && *s)
-	{
-		i++;
-		s++;
-	}
-	return (i);
+	ret = 0;
+	i = -1;
+	while (s[++i])
+		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
+			ret++;
+	return (ret);
 }
 
-static int	word_fill(char const *s, char c, char **d, size_t w_amount)
+char	**ft_split(const char *s, char c)
 {
-	size_t	i;
-	size_t	word;
-	size_t	s_size;
-	size_t	s_sub;
+	int		i;
+	int		start;
+	int		word;
+	char	**result;
 
-	i = 0;
+	result = (char **)malloc(sizeof(char *) * (word_count(s, c) + 1));
+	if (!result)
+		return (NULL);
+	i = -1;
 	word = 0;
-	s_size = ft_strlen(s);
-	while (word < w_amount)
+	while (s[++i])
 	{
-		while (s[i] == c && i < s_size)
-			i++;
-		s_sub = word_len(&s[i], c);
-		d[word] = ft_substr(s, i, s_sub);
-		if (d[word] == NULL)
+		if (s[i] != c)
 		{
-			ft_free2m(d, w_amount);
-			return (-1);
+			start = i;
+			while (s[i] != c && s[i] != '\0')
+				i++;
+			result[word] = ft_strndup(s + start, i - start);
+			if (!result[word])
+				return (ft_free_local_2m(result, word), NULL);
+			word++;
 		}
-		word++;
-		i += s_sub;
 	}
-	return (0);
-}
-
-char	**ft_split(char const *s, char c)
-{
-	char	**rtn;
-	int		w_amount;
-
-	if (!s)
-		return (NULL);
-	w_amount = word_count(s, c);
-	rtn = (char **)ft_calloc(w_amount + 1, sizeof(char *));
-	if (!rtn)
-		return (NULL);
-	if (word_fill((char *)s, c, rtn, w_amount) == -1)
-		return (NULL);
-	return (rtn);
+	result[word] = NULL;
+	return (result);
 }
