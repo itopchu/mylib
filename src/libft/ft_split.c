@@ -12,7 +12,7 @@
 
 #include "../header/libft.h"
 
-static void	ft_free_local_2m(char	**data, int word)
+static void	ft_free_local_2m(char **data)
 {
 	int	i;
 
@@ -37,6 +37,18 @@ static int	word_count(char const *s, char c)
 	return (ret);
 }
 
+static int	ft_con_word(char **to_connect, const char *s, int i, int *start)
+{
+	int	len;
+
+	len = i - *start + 1;
+	*to_connect = ft_substr(s, *start, len);
+	if (!(*to_connect))
+		return (1);
+	*start = -1;
+	return (0);
+}
+
 char	**ft_split(const char *s, char c)
 {
 	int		i;
@@ -49,18 +61,14 @@ char	**ft_split(const char *s, char c)
 		return (NULL);
 	i = -1;
 	word = 0;
+	start = -1;
 	while (s[++i])
 	{
-		if (s[i] != c)
-		{
+		if (s[i] != c && start == -1)
 			start = i;
-			while (s[i] != c && s[i] != '\0')
-				i++;
-			result[word] = ft_strndup(s + start, i - start);
-			if (!result[word])
-				return (ft_free_local_2m(result, word), NULL);
-			word++;
-		}
+		if (start != -1 && (!s[i + 1] || s[i + 1] == c))
+			if (ft_con_word(&result[word++], s, i, &start))
+				return (ft_free_local_2m(result), NULL);
 	}
 	result[word] = NULL;
 	return (result);
